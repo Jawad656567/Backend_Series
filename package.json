@@ -1,0 +1,15 @@
+{
+  "name": "youtube_clone_chai_with_code",
+  "version": "1.0.0",
+  "description": "Learning A backend with chai with code with professional way",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "author": "Jawad Ali",
+  "license": "ISC"
+}
