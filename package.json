@@ -2,14 +2,19 @@
   "name": "youtube_clone_chai_with_code",
   "version": "1.0.0",
   "description": "Learning A backend with chai with code with professional way",
+  "type": "module",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodeman src/index.js"
   },
   "keywords": [
     "javascript",
     "backend"
   ],
   "author": "Jawad Ali",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodeman": "^1.1.2",
+    "prettier": "^3.9.5"
+  }
 }
