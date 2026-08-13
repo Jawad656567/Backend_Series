@@ -7,7 +7,8 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(urlencoded());
 
-
-
+import UserRouter from "./routes/user.route.js";
+//router declaration
+app.use("/api/v1/user",UserRouter);
 
 export default app;
