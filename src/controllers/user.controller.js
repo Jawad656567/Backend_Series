@@ -8,12 +8,12 @@ import { uploadOnCloudinary } from "../utils/Cloudinary.js"
 // step 4 part b
 const generateAccessAndRefreshToken = async (userid) => {
     try {
-        const user = await user.findById(userid)
+        const user = await User.findById(userid)
         const accesstoken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
 
         user.refreshToken = refreshToken
-        await user.save({ validateBeforesave: false })
+        await user.save({ validateBeforeSave: false })
 
         return { accesstoken, refreshToken }
     } catch (error) {
@@ -131,6 +131,7 @@ const registerUser = asynchandler(async (req, res) => {
 })
 
 const LoginUser = asynchandler(async (req, res) => {
+     console.log("REQ BODY:", req.body);
     //req body -> Data (username or email)
     // find the user
     // password check
@@ -140,12 +141,12 @@ const LoginUser = asynchandler(async (req, res) => {
     // step 1 req body
     const { email, username, password } = req.body;
 
-    if (!username || password) {
+    if (!username && !email) {
         throw new ApiError(400, "Username or email is requiered");
     }
 
     //step 2 find the user
-    const user = User.findOne({
+    const user = await User.findOne({
         $or: [{ username }, { email }]
     })
 
@@ -168,7 +169,7 @@ const LoginUser = asynchandler(async (req, res) => {
 
     //send cookie 
 
-    const loggedinUser = User.findById(user._id)
+    const loggedinUser = await User.findById(user._id)
         .select("-password -refreshToken");
 
     const Option = {

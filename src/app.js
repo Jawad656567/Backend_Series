@@ -1,5 +1,5 @@
 import express, { urlencoded } from "express";
-import Cors from "Cors";
+import Cors from "cors";
 const app=express();
 
 app.use(Cors());
