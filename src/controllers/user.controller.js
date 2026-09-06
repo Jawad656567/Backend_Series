@@ -386,7 +386,7 @@ const getUserChannelProfile = asynchandler(async (req, res) => {
             $lookup: {
                 from: "subscriptions",
                 localField: "_id",
-                foreignField: "subsciber",
+                foreignField: "subscriber",
                 as: "subscribedTo"
             }
 
@@ -437,10 +437,13 @@ const getUserChannelProfile = asynchandler(async (req, res) => {
 
 })
 
+const getWatchHistory=asynchandler(async(req,res)=>{
 
+})
 
 
 export {
     registerUser, LoginUser, LoggedoutUser, refreshAccesstoken, changeCurrentPassword,
-    getCurrentUser, updateAccountDeatail, updateUserAvatar, updateCoverImage, getUserChannelProfile
+    getCurrentUser, updateAccountDeatail, updateUserAvatar, updateCoverImage, getUserChannelProfile,
+    getWatchHistory
 }
