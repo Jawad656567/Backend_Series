@@ -277,8 +277,8 @@ const changeCurrentPassword = asynchandler(async (req, res) => {
 })
 
 const getCurrentUser = asynchandler(async (req, res) => {
-    return res.status()
-        .json(200, req.user, "Current User Fetched Successfuly")
+    return res.status(200)
+        .json(new ApiResponse(200, req.user, "Current User Fetched Successfuly") )
 
 })
 
@@ -402,7 +402,7 @@ const getUserChannelProfile = asynchandler(async (req, res) => {
                 },
                 isSubscibed: {
                     $cond: {
-                        if: { $in: [req.user?._id, "$subscibers.subsciber"] },
+                        if: { $in: [req.user?._id, "$subscribers.subsciber"] },
                         then: true,
                         else: false
                     }
@@ -426,7 +426,7 @@ const getUserChannelProfile = asynchandler(async (req, res) => {
         }
     ])
 
-    if (!channel?.lenght) {
+    if (!channel?.length) {
         throw new ApiError(404, "Channel Does not Exists")
     }
 
@@ -457,7 +457,7 @@ const getWatchHistory = asynchandler(async (req, res) => {
                             from: "users",
                             localField: "owner",
                             foreignField: "_id",
-                            as: "Owner",
+                            as: "owner",
                             pipeline: [
                                 {
                                     $project: {
@@ -475,19 +475,13 @@ const getWatchHistory = asynchandler(async (req, res) => {
                     {
                         $addFields: {
                             owner: {
-                                $first: "owner"
+                                $first: "$owner"
                             }
                         }
                     }
                 ]
             }
         },
-        {
-
-        }
-
-
-
 
     ])
     return res.status(200)
